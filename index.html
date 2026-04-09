@@ -43,7 +43,7 @@ body{background:var(--dark);color:var(--text);font-family:'Montserrat',sans-seri
 .pcard.hide{display:none;}
 /* PHOTO */
 .card-photo{position:relative;height:280px;overflow:hidden;background:var(--dark3);display:flex;align-items:center;justify-content:center;}
-.card-photo img{width:100%;height:100%;object-fit:cover;transition:transform .6s;}
+.card-photo img{width:100%;height:100%;object-fit:contain;object-position:center top;transition:transform .6s;background:var(--dark3);}
 .pcard:hover .card-photo img{transform:scale(1.05);}
 .card-photo::after{content:'';position:absolute;bottom:0;left:0;right:0;height:130px;background:linear-gradient(transparent,rgba(8,8,8,.95));pointer-events:none;z-index:1;}
 .ph{display:none;flex-direction:column;align-items:center;justify-content:center;width:100%;height:100%;gap:10px;background:linear-gradient(160deg,#181408,#0c0c0c);}
@@ -136,7 +136,7 @@ body{background:var(--dark);color:var(--text);font-family:'Montserrat',sans-seri
 .overlay.open{display:flex;}
 .modal{background:var(--dark2);border:1px solid var(--borgona2);border-radius:var(--r);width:100%;max-width:480px;overflow:hidden;position:relative;margin:auto;}
 .modal-photo{height:240px;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;background:var(--dark3);}
-.modal-photo img{width:100%;height:100%;object-fit:cover;}
+.modal-photo img{width:100%;height:100%;object-fit:contain;object-position:center top;background:var(--dark3);}
 .modal-photo::after{content:'';position:absolute;bottom:0;left:0;right:0;height:110px;background:linear-gradient(transparent,rgba(8,8,8,.98));pointer-events:none;}
 .modal-photo-name{position:absolute;bottom:0;left:0;right:0;z-index:3;padding:12px 18px 16px;}
 .modal-close{position:absolute;top:12px;right:14px;background:rgba(0,0,0,.6);border:1px solid #333;color:var(--text);width:32px;height:32px;border-radius:50%;cursor:pointer;font-size:18px;z-index:10;transition:background .2s;}
@@ -235,8 +235,37 @@ footer{text-align:center;padding:48px 20px;border-top:1px solid #141414;margin-t
 .foot-note{font-size:11px;color:var(--muted);margin-top:18px;line-height:2.2;text-align:center;}
 .empty-msg{text-align:center;padding:80px 20px;color:var(--muted);}
 .empty-msg p{font-family:'Cormorant Garamond',serif;font-size:26px;margin-bottom:8px;}
-@media(max-width:500px){.grid{grid-template-columns:1fr;padding:10px 12px 32px;}.card-photo{height:240px;}}
-@media(min-width:501px) and (max-width:900px){.grid{grid-template-columns:repeat(auto-fill,minmax(340px,1fr));}}
+@media(max-width:500px){
+  .grid{grid-template-columns:1fr;padding:10px 10px 32px;gap:14px;}
+  .card-photo{height:320px;}
+  .card-body{padding:13px 14px 15px;}
+  .photo-title{font-size:22px;}
+  .photo-brand{font-size:8px;letter-spacing:3px;}
+  .inspo-card{padding:9px 11px;gap:9px;}
+  .inspo-name{font-size:11px;}
+  .hero h1{font-size:clamp(38px,10vw,70px);}
+  .hero{padding:40px 16px 32px;}
+  .filters{padding:10px 10px;gap:5px;}
+  .fbtn{padding:5px 12px;font-size:9px;}
+  .search-wrap{padding:0 10px 10px;}
+  .cuotas-box{padding:11px 12px;}
+  .cuota-lbl{font-size:10px;}
+  .cuota-val{font-size:16px;}
+  .modal{border-radius:12px 12px 0 0;margin:auto 0 0 0;max-height:92vh;overflow-y:auto;}
+  .overlay{align-items:flex-end;padding:0;}
+  .modal{width:100%;max-width:100%;border-radius:16px 16px 0 0;}
+  .modal-photo{height:260px;}
+  .cart-drawer{max-width:100%;}
+  .price-cash{font-size:22px;}
+  .tagline{font-size:10px;}
+  .sec{padding:24px 12px 8px;}
+  .hero-sub{font-size:9px;letter-spacing:3px;}
+  .accord-fill{font-size:10px;}
+}
+@media(min-width:501px) and (max-width:900px){
+  .grid{grid-template-columns:repeat(2,1fr);gap:14px;}
+  .card-photo{height:280px;}
+}
 </style>
 </head>
 <body>
@@ -427,359 +456,368 @@ const MSG_DEFAULTS = {
 // DATA
 // ═══════════════════════════════════════════════════════
 const PERFUMES = [
-  // ════ RAYHAAN ════
-  {id:'rayhaan-elixir',sec:'arabes',marca:'Rayhaan',nombre:'Elixir',emoji:'✨',genero:'masculino',ocasion:'noche',
-   tags:['arabemarc','masculino','noche','oriental','dulce'],
-   linea:'Menta fresca, lavanda elegante y vainilla profunda. 90% idéntico al Le Male Elixir.',
-   acordes:[['Oriental',95],['Dulce',88],['Aromático',75],['Vainilla',68],['Amaderado',50]],
-   notas:{top:['Menta','Bergamota'],mid:['Lavanda','Benjuí'],base:['Vainilla','Haba Tonka']},
-   lon:4,proy:4,inspo:{nombre:'JPG Le Male Elixir',precio:170,sim:90},hot:true,nuevo:false,precio:50,cuando:'Citas · Noches · Invierno'},
-
-  {id:'rayhaan-tropical-vibe',sec:'arabes',marca:'Rayhaan',nombre:'Tropical Vibe',emoji:'🌴',genero:'unisex',ocasion:'dia',
-   tags:['arabemarc','unisex','dia','fresco','frutal'],
-   linea:'Mango, piña y brisa marina. El verano eterno en cada spray.',
-   acordes:[['Afrutados',95],['Tropical',88],['Fresco',75],['Acuático',60],['Dulce',42]],
-   notas:{top:['Mango','Piña','Bergamota'],mid:['Coco','Flores Blancas','Brisa Marina'],base:['Ámbar','Sándalo','Almizcle']},
-   lon:4,proy:3,inspo:null,hot:true,nuevo:false,precio:50,cuando:'Playa · Casual · Todo el día'},
-
-  {id:'rayhaan-pacific-aura',sec:'arabes',marca:'Rayhaan',nombre:'Pacific Aura',emoji:'🌊',genero:'masculino',ocasion:'dia',
-   tags:['arabemarc','masculino','dia','fresco'],
-   linea:'Acuático, fresco y moderno. El Pacífico en cada spray.',
-   acordes:[['Acuático',90],['Fresco',82],['Aromático',65],['Amaderado',48],['Almizclado',35]],
-   notas:{top:['Bergamota','Lima','Notas Acuáticas'],mid:['Lavanda','Salvia','Geranio'],base:['Cedro','Almizcle','Ámbar Gris']},
-   lon:3,proy:3,inspo:{nombre:'D&G Light Blue Intense',precio:130,sim:80},hot:false,nuevo:false,precio:50,cuando:'Trabajo · Clima cálido · Diario'},
-
-  {id:'rayhaan-italia',sec:'arabes',marca:'Rayhaan',nombre:'Italia',emoji:'🇮🇹',genero:'masculino',ocasion:'dia',
-   tags:['arabemarc','masculino','dia','fresco'],
-   linea:'Elegante, mediterráneo y sofisticado. La esencia del estilo italiano.',
-   acordes:[['Fresco',90],['Cítrico',80],['Aromático',65],['Amaderado',50],['Verde',38]],
-   notas:{top:['Bergamota','Limón','Mandarina'],mid:['Lavanda','Geranio','Salvia'],base:['Sándalo','Vetiver','Almizcle']},
-   lon:3,proy:3,inspo:null,hot:false,nuevo:false,precio:50,cuando:'Oficina · Reuniones · Clima cálido'},
 
   // ════ ARMAF ODYSSEY ════
-  {id:'odyssey-go-mango',sec:'arabes',marca:'Armaf',nombre:'Odyssey Go Mango',emoji:'🥭',genero:'unisex',ocasion:'dia',
-   tags:['arabemarc','unisex','dia','frutal','dulce'],
-   linea:'Mango explosivo, jengibre fresco y base ambarada. Jugo tropical en estado puro.',
-   acordes:[['Afrutados',95],['Tropical',88],['Dulce',72],['Cítrico',55],['Amaderado',38]],
-   notas:{top:['Limón','Pimienta Rosa','Jengibre','Flores Blancas'],mid:['Mango','Haba Tonka','Madera Seca'],base:['Ámbar','Vainilla','Almizcle']},
-   lon:4,proy:4,inspo:null,hot:true,nuevo:true,precio:45,cuando:'Verano · Casual · Uso diario'},
-
-  {id:'odyssey-mega-man',sec:'arabes',marca:'Armaf',nombre:'Odyssey Mega Man',emoji:'⚡',genero:'masculino',ocasion:'dia',
-   tags:['arabemarc','masculino','dia','fresco'],
-   linea:'Cítrico, fresco y amaderado. El compañero diario del hombre moderno.',
-   acordes:[['Fresco',88],['Cítrico',80],['Aromático',68],['Amaderado',52],['Almizclado',35]],
-   notas:{top:['Naranja','Bergamota','Limón','Jengibre','Menta'],mid:['Piña','Salvia','Enebro','Geranio'],base:['Almizcle','Cedro','Haba Tonka','Vetiver']},
-   lon:3,proy:3,inspo:{nombre:'YSL Y EDP',precio:155,sim:78},hot:false,nuevo:false,precio:38,cuando:'Trabajo · Reuniones · Diario'},
-
-  {id:'odyssey-mandarin-sky-elixir',sec:'arabes',marca:'Armaf',nombre:'Odyssey Mandarin Sky Elixir',emoji:'🟠',genero:'masculino',ocasion:'noche',
-   tags:['arabemarc','masculino','noche','oriental','dulce'],
-   linea:'Mandarina vibrante, maderas ámbar y base sedosa. Fresco de día, seductor de noche.',
-   acordes:[['Afrutados',88],['Amaderado',78],['Oriental',65],['Dulce',55],['Almizclado',40]],
-   notas:{top:['Mandarina','Bergamota','Jengibre'],mid:['Madera Ámbar','Pimienta Rosa'],base:['Haba Tonka','Sándalo','Almizcle']},
-   lon:4,proy:4,inspo:null,hot:false,nuevo:true,precio:45,cuando:'Día y noche · Todo el año'},
-
-  {id:'odyssey-limoni',sec:'arabes',marca:'Armaf',nombre:'Odyssey Limoni',emoji:'🍋',genero:'unisex',ocasion:'dia',
-   tags:['arabemarc','unisex','dia','fresco','citrico'],
-   linea:'Limón brillante, flor de naranja y té. Fresco, limpio y energizante.',
-   acordes:[['Cítrico',92],['Fresco',85],['Acuático',65],['Aromático',50],['Almizclado',35]],
-   notas:{top:['Limón','Naranja','Mandarina','Bergamota'],mid:['Flor de Naranja','Notas Marinas','Jengibre'],base:['Té','Almizcle','Ámbar']},
-   lon:3,proy:3,inspo:null,hot:false,nuevo:false,precio:35,cuando:'Mañana · Trabajo · Clima cálido'},
-
-  {id:'odyssey-aqua',sec:'arabes',marca:'Armaf',nombre:'Odyssey Aqua Edition',emoji:'💧',genero:'masculino',ocasion:'dia',
-   tags:['arabemarc','masculino','dia','fresco','acuatico'],
-   linea:'Acuático, fresco y minty. Una ola de frescura que dura todo el día.',
-   acordes:[['Acuático',92],['Fresco',85],['Aromático',70],['Amaderado',52],['Almizclado',38]],
-   notas:{top:['Naranja','Pomelo','Artemisa'],mid:['Menta','Lavanda'],base:['Ambroxan','Ciprés','Pachulí']},
-   lon:3,proy:3,inspo:{nombre:'Invictus Platinum',precio:130,sim:75},hot:false,nuevo:false,precio:38,cuando:'Trabajo · Deporte · Diario'},
-
-  {id:'odyssey-homme',sec:'arabes',marca:'Armaf',nombre:'Odyssey Homme',emoji:'🖤',genero:'masculino',ocasion:'noche',
-   tags:['arabemarc','masculino','noche','oriental','dulce'],
-   linea:'Mandarina, cardamomo y vainilla. Oscuro, cálido y seductor.',
-   acordes:[['Oriental',90],['Dulce',82],['Amaderado',68],['Especiado',55],['Almizclado',40]],
-   notas:{top:['Vainilla','Ámbar'],mid:['Notas Orientales','Especias','Iris'],base:['Vainilla','Cuero','Jazmín']},
-   lon:4,proy:4,inspo:{nombre:'Tom Ford Noir Extreme',precio:260,sim:78},hot:false,nuevo:false,precio:40,cuando:'Noches · Citas · Invierno'},
-
   {id:'odyssey-bahamas',sec:'arabes',marca:'Armaf',nombre:'Odyssey Bahamas',emoji:'🏝️',genero:'unisex',ocasion:'dia',
    tags:['arabemarc','unisex','dia','fresco','frutal','acuatico'],
-   linea:'Melón cantaloupe, pera y notas marinas. Vacaciones en cada spray.',
+   linea:'Melón, pera y notas marinas. Vacaciones en cada spray. Proyección beast mode.',
    acordes:[['Acuático',90],['Afrutados',82],['Fresco',70],['Almizclado',50],['Amaderado',35]],
-   notas:{top:['Pera','Ciruela','Manzana Verde','Melón','Sal','Algas'],mid:['Musgo de Roble','Notas Acuáticas','Lirio de Agua','Incienso'],base:['Cedro','Ámbar','Almizcle','Azúcar Blanca']},
-   lon:4,proy:4,inspo:{nombre:'Acqua di Giò EDP',precio:130,sim:80},hot:true,nuevo:true,precio:42,cuando:'Playa · Verano · Casual'},
+   notas:{top:['Pera','Manzana Verde','Melón','Sal Marina'],mid:['Musgo de Roble','Notas Acuáticas','Lirio'],base:['Cedro','Ámbar','Almizcle']},
+   lon:4,proy:4,inspo:{nombre:'Acqua di Giò EDP',precio:25,sim:88},hot:true,nuevo:true,precio:25,cash:34,fiado:43,cuando:'Playa · Verano · Casual'},
 
   {id:'odyssey-candee',sec:'arabes',marca:'Armaf',nombre:'Odyssey Candee',emoji:'🍓',genero:'femenino',ocasion:'dia',
    tags:['arabemarc','femenino','dia','dulce','floral'],
-   linea:'Fresa, frambuesa y caramelo. Dulce, femenino y adictivo.',
+   linea:'Floral frutal adictivo. Rosa inglesa, frambuesa y almizcle suave. 87% idéntico al Burberry Her Elixir.',
    acordes:[['Afrutados',90],['Dulce',85],['Floral',65],['Gourmand',58],['Almizclado',38]],
-   notas:{top:['Fresa','Frambuesa','Geranio','Durazno','Bergamota'],mid:['Caramelo','Jazmín','Maracuyá'],base:['Pachulí','Almizcle','Ámbar']},
-   lon:3,proy:3,inspo:null,hot:false,nuevo:false,precio:38,cuando:'Diario · Casual · Para regalar'},
+   notas:{top:['Fresa','Frambuesa','Bergamota'],mid:['Caramelo','Jazmín','Maracuyá'],base:['Pachulí','Almizcle','Ámbar']},
+   lon:3,proy:3,inspo:{nombre:'Burberry Her Elixir',precio:130,sim:87},hot:false,nuevo:false,precio:20,cash:27,fiado:34,cuando:'Diario · Casual · Para regalar'},
 
-  {id:'odyssey-spectra',sec:'arabes',marca:'Armaf',nombre:'Odyssey Spectra',emoji:'🌟',genero:'unisex',ocasion:'noche',
-   tags:['arabemarc','unisex','noche','oriental','dulce'],
-   linea:'Canela, manzana y vainilla. La versión Armaf del DNA Ultra Male.',
-   acordes:[['Oriental',88],['Dulce',80],['Especiado',70],['Aromático',55],['Vainilla',45]],
-   notas:{top:['Canela','Manzana','Bergamota'],mid:['Canela','Lavanda','Flor de Naranja','Lirio de los Valles'],base:['Vainilla','Tabaco','Haba Tonka','Ámbar','Pachulí']},
-   lon:4,proy:4,inspo:{nombre:'JPG Ultra Male',precio:155,sim:82},hot:false,nuevo:false,precio:40,cuando:'Noches · Citas · Invierno'},
+  {id:'odyssey-go-mango',sec:'arabes',marca:'Armaf',nombre:'Odyssey Go Mango',emoji:'🥭',genero:'unisex',ocasion:'dia',
+   tags:['arabemarc','unisex','dia','frutal','dulce'],
+   linea:'Mango explosivo, jengibre y base ambarada. Potencia y calor del God of Fire al alcance de todos.',
+   acordes:[['Afrutados',95],['Tropical',88],['Dulce',72],['Cítrico',55],['Amaderado',38]],
+   notas:{top:['Limón','Pimienta Rosa','Jengibre'],mid:['Mango','Haba Tonka','Madera Seca'],base:['Ámbar','Vainilla','Almizcle']},
+   lon:4,proy:4,inspo:{nombre:'Initio Parfums God of Fire',precio:350,sim:86},hot:true,nuevo:true,precio:25,cash:34,fiado:43,cuando:'Verano · Casual · Uso diario'},
 
-  // ════ AFNAN 9PM ════
-  {id:'9pm-night-out',sec:'arabes',marca:'Afnan',nombre:'9PM Night Out',emoji:'🌃',genero:'masculino',ocasion:'noche',
+  {id:'odyssey-homme-white',sec:'arabes',marca:'Armaf',nombre:'Odyssey Homme White',emoji:'🖤',genero:'masculino',ocasion:'noche',
    tags:['arabemarc','masculino','noche','oriental','dulce'],
-   linea:'Vainilla cálida, lavanda aromática y ámbar envolvente. El favorito de la noche.',
-   acordes:[['Amaderado',90],['Cálido Especiado',82],['Afrutados',68],['Dulce',60],['Aromático',52],['Tropical',40],['Lavanda',35],['Florales',28],['Avainillado',22],['Ámbar',18]],
-   notas:{top:['Manzana','Canela','Lavanda','Bergamota'],mid:['Flor de Azahar','Lirio de los Valles'],base:['Vainilla','Haba Tonka','Ámbar','Pachulí']},
-   lon:5,proy:4,inspo:{nombre:'JPG Ultra Male',precio:155,sim:87},hot:true,nuevo:false,precio:65,cuando:'Noches · Citas · Invierno'},
+   linea:'Cardamomo, castaña y vainilla dulce. Especiado, cálido y elegante. El Stronger With You árabe.',
+   acordes:[['Especiado',90],['Dulce',82],['Oriental',68],['Amaderado',55],['Almizclado',40]],
+   notas:{top:['Cardamomo','Mandarina','Pimienta Rosa'],mid:['Castaña','Salvia','Flores Blancas'],base:['Vainilla','Madera de Cachemira','Almizcle']},
+   lon:4,proy:4,inspo:{nombre:'Emporio Armani Stronger With You',precio:20,sim:87},hot:false,nuevo:false,precio:20,cash:27,fiado:34,cuando:'Noches · Citas · Otoño/Invierno'},
 
-  {id:'9pm-rebel',sec:'arabes',marca:'Afnan',nombre:'9PM Rebel',emoji:'🍍',genero:'unisex',ocasion:'noche',
-   tags:['arabemarc','unisex','noche','frutal','dulce'],
-   linea:'Piña ahumada, manzana verde y base ambarada. Beast mode garantizado.',
-   acordes:[['Afrutados',95],['Dulce',85],['Amaderado',68],['Cítrico',55],['Almizclado',40]],
-   notas:{top:['Mandarina','Piña','Manzana Verde'],mid:['Cedro','Caramelo','Flores Blancas'],base:['Ámbar','Almizcle','Pachulí']},
-   lon:5,proy:5,inspo:{nombre:'Creed Aventus Absolu',precio:450,sim:85},hot:true,nuevo:false,precio:55,cuando:'Noches · Fiestas · Eventos'},
+  {id:'odyssey-limoni',sec:'arabes',marca:'Armaf',nombre:'Odyssey Limoni',emoji:'🍋',genero:'unisex',ocasion:'dia',
+   tags:['arabemarc','unisex','dia','fresco','citrico'],
+   linea:'Limón siciliano, té blanco y almizcle limpio. La frescura del Louis Vuitton Afternoon en formato beast mode.',
+   acordes:[['Cítrico',92],['Fresco',85],['Acuático',65],['Aromático',50],['Almizclado',35]],
+   notas:{top:['Limón','Naranja','Mandarina','Bergamota'],mid:['Flor de Naranja','Notas Marinas','Jengibre'],base:['Té','Almizcle','Ámbar']},
+   lon:3,proy:3,inspo:{nombre:'Louis Vuitton Afternoon',precio:160,sim:84},hot:false,nuevo:false,precio:20,cash:27,fiado:34,cuando:'Mañana · Trabajo · Clima cálido'},
 
-  {id:'9pm-edp',sec:'arabes',marca:'Afnan',nombre:'9PM EDP',emoji:'🕘',genero:'masculino',ocasion:'noche',
+  {id:'odyssey-mandarin-sky-elixir',sec:'arabes',marca:'Armaf',nombre:'Odyssey Mandarin Sky Elixir',emoji:'🟠',genero:'masculino',ocasion:'noche',
    tags:['arabemarc','masculino','noche','oriental','dulce'],
-   linea:'El original icónico. Manzana, lavanda y vainilla que conquistan la noche.',
-   acordes:[['Oriental',90],['Dulce',82],['Aromático',70],['Afrutados',58],['Amaderado',45]],
-   notas:{top:['Manzana','Canela','Lavanda','Bergamota'],mid:['Flor de Azahar','Lirio de los Valles'],base:['Vainilla','Haba Tonka','Ámbar','Pachulí']},
-   lon:4,proy:4,inspo:{nombre:'JPG Ultra Male',precio:155,sim:85},hot:false,nuevo:false,precio:45,cuando:'Noches · Citas · Todo el año'},
+   linea:'Mandarina vibrante, especias y base ambarada sensual. 88% idéntico al Scandal Le Parfum de Jean Paul Gaultier.',
+   acordes:[['Afrutados',88],['Amaderado',78],['Oriental',65],['Dulce',55],['Almizclado',40]],
+   notas:{top:['Mandarina','Bergamota','Jengibre'],mid:['Madera Ámbar','Pimienta Rosa'],base:['Haba Tonka','Sándalo','Almizcle']},
+   lon:4,proy:4,inspo:{nombre:'Jean Paul Gaultier Scandal Le Parfum',precio:150,sim:88},hot:false,nuevo:true,precio:28,cash:38,fiado:48,cuando:'Día y noche · Todo el año'},
 
-  {id:'9pm-elixir',sec:'arabes',marca:'Afnan',nombre:'9PM Elixir',emoji:'💫',genero:'unisex',ocasion:'noche',
-   tags:['arabemarc','unisex','noche','oriental','especiado'],
-   linea:'Cardamomo vibrante, cuero suave y vainilla oscura. La versión más intensa.',
-   acordes:[['Oriental',92],['Especiado',85],['Amaderado',70],['Cuero',55],['Vainilla',48]],
-   notas:{top:['Cardamomo','Nuez Moscada','Elemi'],mid:['Pimienta','Cuero','Lavanda'],base:['Vainilla','Pachulí','Labdano','Rosa de Roca']},
-   lon:5,proy:4,inspo:{nombre:'Armani Code Parfum',precio:180,sim:80},hot:false,nuevo:true,precio:55,cuando:'Noches · Citas · Clima frío'},
+  {id:'odyssey-marshmallow',sec:'arabes',marca:'Armaf',nombre:'Odyssey Marshmallow',emoji:'☁️',genero:'unisex',ocasion:'dia',
+   tags:['arabemarc','unisex','dia','dulce','gourmand'],
+   linea:'Malvavisco suave, vainilla y pralinée cremoso. Nube de azúcar en spray.',
+   acordes:[['Dulce',92],['Gourmand',85],['Cremoso',72],['Vainilla',60],['Almizclado',38]],
+   notas:{top:['Malvavisco','Azúcar','Bergamota'],mid:['Pralinée','Flores Blancas','Vainilla'],base:['Almizcle','Sándalo','Ámbar']},
+   lon:3,proy:3,inspo:{nombre:'Kayali Vanilla',precio:25,sim:87},hot:false,nuevo:false,precio:25,cash:34,fiado:43,cuando:'Casual · Diario · Para regalar'},
 
-  // ════ AFNAN SUPREMACY ════
-  {id:'supremacy-collector',sec:'arabes',marca:'Afnan',nombre:'Supremacy Collector Edition',emoji:'👑',genero:'masculino',ocasion:'noche',
-   tags:['arabemarc','masculino','noche','frutal','amaderado'],
-   linea:'Piña, bergamota y base ambarada ahumada. El Aventus árabe que todos mencionan.',
-   acordes:[['Afrutados',92],['Amaderado',82],['Almizclado',70],['Cítrico',58],['Ambarado',45]],
-   notas:{top:['Piña','Bergamota','Flores Blancas','Manzana'],mid:['Flor de Naranja','Abedul','Ámbar'],base:['Musgo de Roble','Almizcle','Ambergris']},
-   lon:5,proy:5,inspo:{nombre:'Creed Aventus Absolu',precio:450,sim:88},hot:true,nuevo:false,precio:65,cuando:'Noches · Eventos · Uso especial'},
+  {id:'odyssey-mega-man',sec:'arabes',marca:'Armaf',nombre:'Odyssey Mega Man',emoji:'⚡',genero:'masculino',ocasion:'dia',
+   tags:['arabemarc','masculino','dia','fresco','amaderado'],
+   linea:'Cítrico, fresco y amaderado. El compañero diario del hombre moderno. Gran rendimiento.',
+   acordes:[['Fresco',88],['Cítrico',80],['Aromático',68],['Amaderado',52],['Almizclado',35]],
+   notas:{top:['Naranja','Bergamota','Limón','Jengibre'],mid:['Piña','Salvia','Geranio'],base:['Almizcle','Cedro','Haba Tonka','Vetiver']},
+   lon:3,proy:3,inspo:{nombre:'YSL Y EDP',precio:20,sim:80},hot:false,nuevo:false,precio:20,cash:27,fiado:34,cuando:'Trabajo · Reuniones · Diario'},
 
-  // ════ AL HARAMAIN AMBER OUD ════
-  {id:'amber-oud-black',sec:'arabes',marca:'Al Haramain',nombre:'Amber Oud Black Edition',emoji:'🖤',genero:'unisex',ocasion:'noche',
-   tags:['arabemarc','unisex','noche','oriental','oud'],
-   linea:'Oud oscuro, ambergris y especias. Misterioso, poderoso e inolvidable.',
-   acordes:[['Oud',92],['Oriental',85],['Amaderado',72],['Especiado',60],['Almizclado',45]],
-   notas:{top:['Azafrán','Pimienta Negra'],mid:['Oud','Rosa'],base:['Ambergris','Sándalo','Almizcle']},
-   lon:5,proy:5,inspo:null,hot:false,nuevo:false,precio:60,cuando:'Noches · Eventos · Ocasiones especiales'},
-
-  {id:'amber-oud-aqua-dubai',sec:'arabes',marca:'Al Haramain',nombre:'Amber Oud Aqua Dubai',emoji:'💎',genero:'unisex',ocasion:'dia',
-   tags:['arabemarc','unisex','dia','fresco','acuatico'],
-   linea:'Bergamota, melón y piña con fondo vainillado. Fresco con alma oriental.',
-   acordes:[['Fresco',88],['Afrutados',80],['Acuático',68],['Dulce',52],['Almizclado',38]],
-   notas:{top:['Bergamota','Notas Verdes','Mandarina'],mid:['Melón','Ámbar','Grosella Negra','Piña'],base:['Almizcle','Petitgrain','Vainilla']},
-   lon:4,proy:4,inspo:{nombre:'Lacoste Imagination',precio:120,sim:82},hot:false,nuevo:false,precio:52,cuando:'Día · Oficina · Clima cálido'},
-
-  {id:'amber-oud-dubai-night',sec:'arabes',marca:'Al Haramain',nombre:'Amber Oud Dubai Night',emoji:'🌙',genero:'unisex',ocasion:'noche',
-   tags:['arabemarc','unisex','noche','oriental','dulce'],
-   linea:'Caramelo, rosa y ámbar en la noche de Dubai. Lujoso y envolvente.',
-   acordes:[['Oriental',90],['Dulce',82],['Oud',65],['Floral',52],['Almizclado',40]],
-   notas:{top:['Bergamota','Azafrán'],mid:['Rosa','Oud','Ámbar'],base:['Almizcle','Sándalo','Vainilla']},
-   lon:5,proy:4,inspo:null,hot:false,nuevo:false,precio:58,cuando:'Noches · Citas · Invierno'},
-
-  {id:'amber-oud-ruby',sec:'arabes',marca:'Al Haramain',nombre:'Amber Oud Ruby Edition',emoji:'💎',genero:'unisex',ocasion:'noche',
-   tags:['arabemarc','unisex','noche','floral','dulce'],
-   linea:'Azafrán, almendra y ambergris rosado. El Baccarat Rouge árabe.',
-   acordes:[['Floral',90],['Dulce',82],['Ambarado',70],['Almizclado',55],['Especiado',38]],
-   notas:{top:['Azafrán','Almendra Amarga'],mid:['Cedro','Jazmín Egipcio'],base:['Ambergris','Notas Amaderadas','Almizcle']},
-   lon:5,proy:5,inspo:{nombre:'Baccarat Rouge 540',precio:400,sim:82},hot:true,nuevo:false,precio:62,cuando:'Noches · Eventos · Citas'},
-
-  // ════ RASASI HAWAS ════
-  {id:'hawas-ice',sec:'arabes',marca:'Rasasi',nombre:'Hawas Ice',emoji:'🧊',genero:'masculino',ocasion:'dia',
-   tags:['arabemarc','masculino','dia','fresco','acuatico'],
-   linea:'Manzana fresca, anís estrellado y base de deriva marina. Beast mode fresquito.',
-   acordes:[['Fresco',92],['Acuático',85],['Afrutados',70],['Cítrico',55],['Almizclado',40]],
-   notas:{top:['Manzana','Limón','Bergamota','Anís Estrellado'],mid:['Ciruela','Flor de Naranja','Cardamomo'],base:['Almizcle','Ámbar','Madera de Deriva','Musgo']},
-   lon:5,proy:5,inspo:{nombre:'Paco Rabanne Invictus Aqua',precio:120,sim:80},hot:true,nuevo:false,precio:48,cuando:'Verano · Deporte · Diario'},
-
-  {id:'hawas-pink',sec:'arabes',marca:'Rasasi',nombre:'Hawas Pink',emoji:'🌸',genero:'femenino',ocasion:'dia',
-   tags:['arabemarc','femenino','dia','floral','dulce'],
-   linea:'Floral, frutal y cremoso. La versión femenina del legendario Hawas.',
-   acordes:[['Floral',90],['Afrutados',80],['Dulce',68],['Cremoso',52],['Almizclado',38]],
-   notas:{top:['Frutas Rojas','Bergamota','Pera'],mid:['Rosa','Peonía','Jazmín'],base:['Almizcle','Ámbar','Vainilla']},
-   lon:4,proy:4,inspo:null,hot:false,nuevo:false,precio:45,cuando:'Diario · Oficina · Todo el año'},
-
-  {id:'hawas-fire',sec:'arabes',marca:'Rasasi',nombre:'Hawas Fire',emoji:'🔥',genero:'unisex',ocasion:'noche',
-   tags:['arabemarc','unisex','noche','fresco','acuatico'],
-   linea:'Salvia, notas marinas y ambergris. Único, fresco y magnético.',
-   acordes:[['Fresco',88],['Acuático',78],['Aromático',65],['Ambarado',52],['Almizclado',40]],
-   notas:{top:['Salvia Romana'],mid:['Notas Marinas','Jazmín Egipcio'],base:['Ámbar','Notas Minerales','Ambergris']},
-   lon:4,proy:4,inspo:null,hot:true,nuevo:false,precio:48,cuando:'Todo el año · Citas · Noches'},
-
-  {id:'hawas-kobra',sec:'arabes',marca:'Rasasi',nombre:'Hawas Kobra',emoji:'🐍',genero:'masculino',ocasion:'dia',
+  {id:'odyssey-artisto',sec:'arabes',marca:'Armaf',nombre:'Odyssey Artisto',emoji:'🎨',genero:'masculino',ocasion:'dia',
    tags:['arabemarc','masculino','dia','fresco','aromatico'],
-   linea:'Jengibre fresco, té verde y madera de ámbar. Limpio, moderno y de largo recorrido.',
-   acordes:[['Aromático',90],['Fresco',82],['Cítrico',68],['Amaderado',52],['Almizclado',38]],
-   notas:{top:['Jengibre','Bergamota','Mandarina'],mid:['Canela','Té Verde','Neroli'],base:['Almizcle','Maderas','Ámbar']},
-   lon:4,proy:4,inspo:{nombre:'Lacoste Imagination',precio:120,sim:78},hot:false,nuevo:true,precio:45,cuando:'Día · Trabajo · Casual'},
-
-  {id:'hawas-tropical',sec:'arabes',marca:'Rasasi',nombre:'Hawas Tropical',emoji:'🥥',genero:'masculino',ocasion:'dia',
-   tags:['arabemarc','masculino','dia','frutal','fresco'],
-   linea:'Coco cremoso, higo fresco y menta. Vacaciones en un frasco.',
-   acordes:[['Tropical',92],['Fresco',85],['Cremoso',70],['Verde',55],['Almizclado',38]],
-   notas:{top:['Agua de Coco','Hoja de Higo','Jengibre'],mid:['Coco','Higo','Menta'],base:['Sándalo','Haba Tonka','Almizcle']},
-   lon:5,proy:5,inspo:{nombre:'JPG Le Beau Paradise Garden',precio:130,sim:85},hot:true,nuevo:true,precio:48,cuando:'Verano · Playa · Casual'},
-
-  {id:'hawas-black',sec:'arabes',marca:'Rasasi',nombre:'Hawas Black',emoji:'⬛',genero:'masculino',ocasion:'noche',
-   tags:['arabemarc','masculino','noche','amaderado','frutal'],
-   linea:'Piña, musgo de roble y cedro ahumado. El Aventus árabe más oscuro.',
-   acordes:[['Amaderado',90],['Afrutados',80],['Almizclado',68],['Verde',52],['Cítrico',38]],
-   notas:{top:['Bergamota','Pomelo','Piña'],mid:['Pachulí','Cedro','Musgo de Roble'],base:['Ámbar','Sándalo','Almizcle']},
-   lon:4,proy:4,inspo:{nombre:'Creed Aventus',precio:380,sim:82},hot:false,nuevo:false,precio:48,cuando:'Noches · Trabajo formal · Invierno'},
-
-  {id:'hawas-atlantis',sec:'arabes',marca:'Rasasi',nombre:'Hawas Atlantis',emoji:'🌊',genero:'unisex',ocasion:'noche',
-   tags:['arabemarc','unisex','noche','acuatico','oriental'],
-   linea:'Misterioso y acuático. Bergamota, ciruela y madera de deriva del Atlántico.',
-   acordes:[['Acuático',88],['Oriental',78],['Afrutados',65],['Especiado',52],['Almizclado',40]],
-   notas:{top:['Bergamota','Limón','Manzana','Canela'],mid:['Notas Acuáticas','Flor de Naranja','Ciruela','Cardamomo'],base:['Madera de Deriva','Ambergris','Almizcle','Pachulí']},
-   lon:4,proy:4,inspo:null,hot:false,nuevo:true,precio:50,cuando:'Noches · Eventos · Otoño'},
-
-  {id:'hawas-diva',sec:'arabes',marca:'Rasasi',nombre:'Hawas Diva',emoji:'💅',genero:'femenino',ocasion:'noche',
-   tags:['arabemarc','femenino','noche','floral','dulce'],
-   linea:'Lichi, rosa y praliné. La reina de las noches femeninas.',
-   acordes:[['Floral',92],['Dulce',85],['Afrutados',70],['Amaderado',52],['Almizclado',40]],
-   notas:{top:['Frutas Rojas','Ruibarbo','Lichi'],mid:['Rosa','Cedro','Incienso'],base:['Vainilla','Almizcle','Ambergris']},
-   lon:5,proy:5,inspo:{nombre:'Valentino Born in Roma Extradose',precio:200,sim:88},hot:true,nuevo:true,precio:52,cuando:'Noches · Citas · Eventos'},
-
-  {id:'hawas-verde',sec:'arabes',marca:'Rasasi',nombre:'Hawas Verde',emoji:'🍃',genero:'masculino',ocasion:'dia',
-   tags:['arabemarc','masculino','dia','fresco','verde'],
-   linea:'Lima, manzana verde y romero. Mojito en spray. El Torino 21 árabe.',
-   acordes:[['Fresco',92],['Verde',85],['Cítrico',72],['Aromático',58],['Amaderado',38]],
-   notas:{top:['Lima','Romero','Manzana Verde'],mid:[],base:['Pachulí','Ámbar']},
-   lon:4,proy:4,inspo:{nombre:'Memo Paris Torino 21',precio:350,sim:88},hot:true,nuevo:true,precio:45,cuando:'Día · Casual · Todo el año'},
-
-  // ════ LATTAFA ASAD BOURBON ════
-  {id:'asad-bourbon',sec:'arabes',marca:'Lattafa',nombre:'Asad Bourbon',emoji:'🥃',genero:'masculino',ocasion:'noche',
-   tags:['arabemarc','masculino','noche','oriental','dulce'],
-   linea:'Lavanda, cacao y vainilla bourbon. El gemelo accesible del Azzaro Most Wanted.',
-   acordes:[['Oriental',90],['Dulce',82],['Especiado',68],['Amaderado',55],['Aromático',40]],
-   notas:{top:['Lavanda','Ciruela Mirabelle','Pimienta Rosa'],mid:['Cacao','Nuez Moscada','Davana'],base:['Vainilla Bourbon','Ámbar','Vetiver']},
-   lon:4,proy:4,inspo:{nombre:'Azzaro The Most Wanted Intense',precio:120,sim:82},hot:true,nuevo:true,precio:40,cuando:'Noches · Invierno · Citas'},
+   linea:'Coco cremoso, madera de balsam y almizcle fresco. El dupe más cercano al Le Beau de Jean Paul Gaultier.',
+   acordes:[['Fresco',88],['Aromático',80],['Amaderado',65],['Cítrico',50],['Almizclado',38]],
+   notas:{top:['Bergamota','Limón','Lavanda'],mid:['Geranio','Salvia','Cedro'],base:['Almizcle','Ámbar','Vetiver']},
+   lon:3,proy:3,inspo:{nombre:'Jean Paul Gaultier Le Beau',precio:120,sim:87},hot:false,nuevo:false,precio:25,cash:34,fiado:43,cuando:'Trabajo · Día · Casual'},
 
   // ════ ARMAF CLUB DE NUIT ════
-  {id:'cdni',sec:'arabes',marca:'Armaf',nombre:'Club de Nuit Intense',emoji:'🍾',genero:'masculino',ocasion:'noche',
-   tags:['arabemarc','masculino','noche','amaderado','frutal'],
-   linea:'Piña, abedul y ambergris. El Creed Aventus al alcance de todos.',
-   acordes:[['Amaderado',92],['Afrutados',82],['Almizclado',70],['Cítrico',55],['Ambarado',42]],
-   notas:{top:['Limón','Piña','Bergamota','Grosella Negra','Manzana'],mid:['Abedul','Jazmín','Rosa'],base:['Almizcle','Ambergris','Pachulí','Vainilla']},
-   lon:4,proy:4,inspo:{nombre:'Creed Aventus',precio:380,sim:88},hot:true,nuevo:false,precio:45,cuando:'Noches · Eventos · Formal'},
-
-  {id:'cdni-not-only-intense',sec:'arabes',marca:'Armaf',nombre:'Club de Nuit Not Only Intense',emoji:'🌿',genero:'masculino',ocasion:'noche',
-   tags:['arabemarc','masculino','noche','amaderado','frutal'],
-   linea:'Piña ahumada, bergamota y ambergris. Más oscuro y potente que el original.',
-   acordes:[['Amaderado',92],['Afrutados',80],['Almizclado',68],['Especiado',52],['Ambarado',40]],
-   notas:{top:['Bergamota','Piña','Ciruela'],mid:['Abedul','Pachulí','Rosa'],base:['Ambergris','Almizcle','Vainilla']},
-   lon:5,proy:5,inspo:{nombre:'Creed Aventus Absolu',precio:450,sim:86},hot:false,nuevo:false,precio:50,cuando:'Noches · Eventos · Invierno'},
-
-  {id:'cdni-urban-elixir',sec:'arabes',marca:'Armaf',nombre:'Club de Nuit Urban Elixir',emoji:'🌆',genero:'masculino',ocasion:'dia',
-   tags:['arabemarc','masculino','dia','fresco','amaderado'],
-   linea:'Bergamota, pimienta rosa y ambroxan. El Sauvage árabe.',
-   acordes:[['Fresco',90],['Amaderado',82],['Especiado',68],['Aromático',55],['Ambarado',42]],
-   notas:{top:['Bergamota','Pimienta Rosa','Flor de Naranja','Jazmín'],mid:['Lavanda','Geranio','Vetiver','Azafrán'],base:['Ambroxan','Ámbar','Cedro','Pachulí']},
-   lon:5,proy:5,inspo:{nombre:'Dior Sauvage EDP',precio:155,sim:85},hot:true,nuevo:false,precio:50,cuando:'Día y noche · Todo el año · Trabajo'},
-
   {id:'cdni-maleka',sec:'arabes',marca:'Armaf',nombre:'Club de Nuit Maleka',emoji:'👸',genero:'femenino',ocasion:'dia',
    tags:['arabemarc','femenino','dia','floral','dulce'],
    linea:'Lichi, iris y praliné. Femenina, suave y magnética. Creada por Olivier Cresp.',
-   acordes:[['Floral',90],['Dulce',82],['Afrutados',70],['Powdery',58],['Amaderado',40]],
+   acordes:[['Floral',90],['Dulce',82],['Afrutados',70],['Cremoso',58],['Amaderado',40]],
    notas:{top:['Lichi','Bergamota','Pimienta Rosa'],mid:['Iris'],base:['Praliné','Ambroxan','Sándalo']},
-   lon:5,proy:4,inspo:null,hot:false,nuevo:true,precio:50,cuando:'Diario · Reuniones · Todo el año'},
+   lon:5,proy:4,inspo:{nombre:'Good Girl Carolina Herrera',precio:33,sim:89},hot:true,nuevo:true,precio:33,cash:45,fiado:57,cuando:'Diario · Reuniones · Todo el año'},
 
   {id:'cdni-precieux',sec:'arabes',marca:'Armaf',nombre:'Club de Nuit Precieux',emoji:'💍',genero:'unisex',ocasion:'noche',
    tags:['arabemarc','unisex','noche','amaderado','frutal'],
-   linea:'Piña, caramelo y ambroxan. El Aventus Absolu árabe más cercano.',
+   linea:'Piña, caramelo y ambroxan. El Aventus Absolu árabe más cercano que existe.',
    acordes:[['Afrutados',90],['Amaderado',82],['Ambarado',70],['Dulce',55],['Almizclado',42]],
-   notas:{top:['Piña','Limón','Bergamota','Caramelo','Pimienta Rosa'],mid:['Musgo de Roble','Madera Blanca','Jazmín'],base:['Ambroxan','Almizcle Blanco','Pachulí','Ámbar','Cedro','Cuero','Vainilla']},
-   lon:5,proy:5,inspo:{nombre:'Creed Aventus Absolu',precio:450,sim:90},hot:true,nuevo:false,precio:58,cuando:'Noches · Eventos exclusivos · Citas'},
+   notas:{top:['Piña','Limón','Bergamota','Caramelo','Pimienta Rosa'],mid:['Musgo de Roble','Madera Blanca','Jazmín'],base:['Ambroxan','Almizcle Blanco','Pachulí','Ámbar','Vainilla']},
+   lon:5,proy:5,inspo:{nombre:'Creed Aventus Absolu',precio:42,sim:90},hot:true,nuevo:false,precio:42,cash:57,fiado:72,cuando:'Noches · Eventos exclusivos · Citas'},
+
+  // ════ BHARARA ════
+  {id:'bharara-rome-imagine',sec:'arabes',marca:'Bharara',nombre:'Rome Imagine',emoji:'🏛️',genero:'masculino',ocasion:'dia',
+   tags:['arabemarc','masculino','dia','amaderado','fresco'],
+   linea:'Especias exóticas, madera de cachemira y almizcle suave. 86% idéntico al Imagination de Louis Vuitton.',
+   acordes:[['Amaderado',85],['Fresco',75],['Aromático',65],['Oriental',50],['Almizclado',38]],
+   notas:{top:['Bergamota','Limón','Mandarina'],mid:['Jazmín','Geranio','Lavanda'],base:['Cachemira','Sándalo','Ámbar','Almizcle']},
+   lon:4,proy:4,inspo:{nombre:'Louis Vuitton Imagination',precio:320,sim:86},hot:false,nuevo:false,precio:25,cash:34,fiado:43,cuando:'Trabajo · Día · Reuniones'},
+
+  {id:'bharara-rome-uomo',sec:'arabes',marca:'Bharara',nombre:'Rome Uomo',emoji:'🇮🇹',genero:'masculino',ocasion:'noche',
+   tags:['arabemarc','masculino','noche','especiado','amaderado'],
+   linea:'Bergamota, cedro y vainilla romana. La elegancia del Valentino Born in Roma sin el precio de lujo.',
+   acordes:[['Aromático',85],['Amaderado',75],['Especiado',65],['Cuero',52],['Almizclado',38]],
+   notas:{top:['Bergamota','Pimienta Negra','Lavanda'],mid:['Cuero','Salvia','Cardamomo'],base:['Cedro','Ámbar','Almizcle']},
+   lon:4,proy:4,inspo:{nombre:'Valentino Born in Roma',precio:140,sim:85},hot:false,nuevo:false,precio:27,cash:37,fiado:47,cuando:'Noches · Citas · Otoño'},
+
+  {id:'bharara-rome-paradox',sec:'arabes',marca:'Bharara',nombre:'Rome Paradox',emoji:'⚖️',genero:'masculino',ocasion:'noche',
+   tags:['arabemarc','masculino','noche','oriental','especiado'],
+   linea:'Floral amaderado con un giro inesperado. El Prada Paradoxe árabe que nadie esperaba.',
+   acordes:[['Oriental',88],['Especiado',78],['Amaderado',65],['Cuero',50],['Almizclado',38]],
+   notas:{top:['Bergamota','Pimienta Negra','Ciruela'],mid:['Azafrán','Cardamomo','Rosa'],base:['Pachulí','Sándalo','Ámbar']},
+   lon:4,proy:4,inspo:{nombre:'Prada Paradoxe',precio:140,sim:87},hot:false,nuevo:false,precio:28,cash:38,fiado:48,cuando:'Noches · Eventos · Invierno'},
+
+  // ════ DUMONT NITRO ════
+  {id:'nitro-red',sec:'arabes',marca:'Dumont',nombre:'Nitro Red',emoji:'🔴',genero:'masculino',ocasion:'noche',
+   tags:['arabemarc','masculino','noche','oriental','especiado'],
+   linea:'Pomelo, laurel y madera de guayaco. Fresco, potente e imponente. 86% idéntico al Invictus de Paco Rabanne.',
+   acordes:[['Oriental',88],['Especiado',80],['Dulce',68],['Amaderado',55],['Ambarado',42]],
+   notas:{top:['Pimienta Roja','Canela','Cardamomo'],mid:['Ámbar','Rosa','Cuero'],base:['Vainilla','Pachulí','Almizcle']},
+   lon:4,proy:4,inspo:{nombre:'Paco Rabanne Invictus',precio:110,sim:86},hot:false,nuevo:false,precio:25,cash:34,fiado:43,cuando:'Noches · Invierno · Citas'},
+
+  {id:'nitro-white',sec:'arabes',marca:'Dumont',nombre:'Nitro White',emoji:'⚪',genero:'unisex',ocasion:'dia',
+   tags:['arabemarc','unisex','dia','floral','fresco'],
+   linea:'Jazmín blanco, almizcle suave y sándalo cremoso. Limpio, fresco y seductor.',
+   acordes:[['Floral',85],['Fresco',78],['Cremoso',65],['Almizclado',55],['Amaderado',38]],
+   notas:{top:['Bergamota','Limón','Flor de Naranja'],mid:['Jazmín','Magnolia','Rosa'],base:['Sándalo','Almizcle','Cedro']},
+   lon:3,proy:3,inspo:{nombre:'Narciso Rodriguez For Her',precio:25,sim:85},hot:false,nuevo:false,precio:25,cash:34,fiado:43,cuando:'Diario · Oficina · Todo el año'},
+
+  {id:'nitro-elixir',sec:'arabes',marca:'Dumont',nombre:'Nitro Elixir',emoji:'⚗️',genero:'masculino',ocasion:'noche',
+   tags:['arabemarc','masculino','noche','gourmand','amaderado'],
+   linea:'Cardamomo, madera de iris y almizcle sedoso. El dupe árabe del YSL MYSLF L\'Absolu. Exclusivo en H&A.',
+   acordes:[['Gourmand',88],['Amaderado',80],['Cuero',68],['Dulce',58],['Oriental',42]],
+   notas:{top:['Pimienta Negra','Cardamomo','Bergamota'],mid:['Cacao','Cuero','Ámbar'],base:['Vainilla Negra','Sándalo','Almizcle']},
+   lon:5,proy:5,inspo:{nombre:'YSL MYSLF L\'Absolu',precio:160,sim:87},hot:true,nuevo:false,precio:37,cash:50,fiado:63,cuando:'Noches · Citas · Clima frío'},
+
+  // ════ FRENCH AVENUE ════
+  {id:'atlantis-extrait',sec:'arabes',marca:'French Avenue',nombre:'Atlantis Extrait',emoji:'🌊',genero:'masculino',ocasion:'dia',
+   tags:['arabemarc','masculino','dia','fresco','acuatico'],
+   linea:'Sales marinas profundas, madera de deriva y musgo oceánico. El Wavechild de Room 1015 al precio justo.',
+   acordes:[['Acuático',90],['Fresco',82],['Amaderado',65],['Almizclado',52],['Aromático',38]],
+   notas:{top:['Sales Marinas','Bergamota','Limón'],mid:['Madera de Deriva','Algas','Jazmín'],base:['Almizcle','Ámbar','Cedro']},
+   lon:5,proy:5,inspo:{nombre:'Room 1015 Wavechild',precio:280,sim:86},hot:true,nuevo:false,precio:30,cash:41,fiado:52,cuando:'Día · Verano · Trabajo'},
+
+  {id:'liquid-brun',sec:'arabes',marca:'French Avenue',nombre:'Liquid Brun',emoji:'☕',genero:'unisex',ocasion:'noche',
+   tags:['arabemarc','unisex','noche','gourmand','amaderado'],
+   linea:'Café, cuero suave y ámbar cálido. Un viaje al Althair de Parfums de Marly sin gastar una fortuna.',
+   acordes:[['Gourmand',90],['Amaderado',78],['Cuero',62],['Dulce',55],['Oriental',40]],
+   notas:{top:['Café','Bergamota','Canela'],mid:['Cacao','Cuero','Ámbar'],base:['Vainilla','Sándalo','Almizcle']},
+   lon:5,proy:4,inspo:{nombre:'Parfums de Marly Althair',precio:380,sim:88},hot:true,nuevo:false,precio:28,cash:38,fiado:48,cuando:'Noches · Citas · Invierno'},
+
+  {id:'vulcan-feu',sec:'arabes',marca:'French Avenue',nombre:'Vulcan Feu',emoji:'🌋',genero:'masculino',ocasion:'noche',
+   tags:['arabemarc','masculino','noche','especiado','amaderado'],
+   linea:'Especias ardientes, oud volcánico y ámbar profundo. El God of Fire árabe. Proyección de otro nivel.',
+   acordes:[['Especiado',92],['Amaderado',82],['Oriental',68],['Ambarado',55],['Almizclado',40]],
+   notas:{top:['Pimienta Roja','Bergamota','Cardamomo'],mid:['Oud','Pachulí','Incienso'],base:['Ámbar','Sándalo','Almizcle']},
+   lon:5,proy:5,inspo:{nombre:'Initio Parfums God of Fire',precio:350,sim:88},hot:true,nuevo:false,precio:30,cash:41,fiado:52,cuando:'Noches · Eventos · Citas'},
+
+  // ════ AL HARAMAIN ════
+  {id:'amber-oud-gold-100ml',sec:'arabes',marca:'Al Haramain',nombre:'Amber Oud Gold Edition 100ml',emoji:'🏅',genero:'unisex',ocasion:'noche',
+   tags:['arabemarc','unisex','noche','oriental','oud'],
+   linea:'Oud dorado, rosa de Taif y almizcle oriental. El referente árabe del Erba Pura de Xerjoff.',
+   acordes:[['Oriental',92],['Oud',85],['Floral',68],['Amaderado',55],['Almizclado',42]],
+   notas:{top:['Azafrán','Rosa','Bergamota'],mid:['Oud','Ámbar','Incienso'],base:['Sándalo','Almizcle','Vainilla']},
+   lon:5,proy:5,inspo:{nombre:'Xerjoff Erba Pura',precio:280,sim:87},hot:true,nuevo:false,precio:42,cash:57,fiado:72,cuando:'Noches · Eventos especiales · Ocasiones formales'},
+
+  // ════ AFNAN ════
+  {id:'9pm-night-out',sec:'arabes',marca:'Afnan',nombre:'9PM Night Out',emoji:'🌃',genero:'masculino',ocasion:'noche',
+   tags:['arabemarc','masculino','noche','oriental','dulce'],
+   linea:'Frutal cítrico, especias y base ambarada envolvente. 88% idéntico al Forever Wanted Elixir de Azzaro.',
+   acordes:[['Oriental',90],['Dulce',82],['Aromático',68],['Afrutados',55],['Amaderado',40]],
+   notas:{top:['Manzana','Canela','Lavanda','Bergamota'],mid:['Flor de Azahar','Lirio de los Valles'],base:['Vainilla','Haba Tonka','Ámbar','Pachulí']},
+   lon:5,proy:4,inspo:{nombre:'Azzaro Forever Wanted Elixir',precio:120,sim:88},hot:true,nuevo:false,precio:30,cash:41,fiado:52,cuando:'Noches · Citas · Invierno'},
+
+  {id:'9pm-rebel',sec:'arabes',marca:'Afnan',nombre:'9PM Rebel',emoji:'🍍',genero:'unisex',ocasion:'noche',
+   tags:['arabemarc','unisex','noche','frutal','dulce'],
+   linea:'Piña ahumada, manzana verde y ámbar. El dupe directo del Scandal Pour Homme de Jean Paul Gaultier.',
+   acordes:[['Afrutados',95],['Dulce',85],['Amaderado',68],['Cítrico',55],['Almizclado',40]],
+   notas:{top:['Mandarina','Piña','Manzana Verde'],mid:['Cedro','Caramelo','Flores Blancas'],base:['Ámbar','Almizcle','Pachulí']},
+   lon:5,proy:5,inspo:{nombre:'Jean Paul Gaultier Scandal Pour Homme',precio:120,sim:87},hot:true,nuevo:false,precio:28,cash:38,fiado:48,cuando:'Noches · Fiestas · Eventos'},
+
+  {id:'turathi-blue',sec:'arabes',marca:'Afnan',nombre:'Turathi Blue',emoji:'💙',genero:'masculino',ocasion:'dia',
+   tags:['arabemarc','masculino','dia','fresco','acuatico'],
+   linea:'Fresco marino, cítricos y madera blanca. 85% idéntico al Le Gemme Tygar de Bvlgari ($380).',
+   acordes:[['Fresco',90],['Acuático',82],['Cítrico',68],['Amaderado',50],['Almizclado',35]],
+   notas:{top:['Bergamota','Limón','Notas Acuáticas'],mid:['Lavanda','Geranio','Salvia'],base:['Cedro','Almizcle','Ámbar Gris']},
+   lon:4,proy:4,inspo:{nombre:'Bvlgari Le Gemme Tygar',precio:380,sim:85},hot:false,nuevo:false,precio:28,cash:38,fiado:48,cuando:'Trabajo · Diario · Clima cálido'},
+
+  // ════ JO MILANO GAME OF SPADES ════
+  {id:'gos-emerald',sec:'arabes',marca:'Jo Milano',nombre:'Game of Spades Emerald',emoji:'♠️',genero:'unisex',ocasion:'dia',
+   tags:['arabemarc','unisex','dia','fresco','amaderado'],
+   linea:'Notas verdes exóticas, madera preciosa y almizcle elegante. 88% idéntico al Symphony de Louis Vuitton.',
+   acordes:[['Fresco',90],['Amaderado',80],['Verde',68],['Cítrico',55],['Almizclado',42]],
+   notas:{top:['Manzana Verde','Bergamota','Té Verde'],mid:['Iris','Violeta','Geranio'],base:['Cedro','Sándalo','Almizcle']},
+   lon:5,proy:5,inspo:{nombre:'Louis Vuitton Symphony',precio:450,sim:88},hot:true,nuevo:false,precio:68,cash:92,fiado:115,cuando:'Día · Trabajo formal · Todo el año'},
+
+  {id:'gos-wildcard',sec:'arabes',marca:'Jo Milano',nombre:'Game of Spades Wildcard',emoji:'🃏',genero:'unisex',ocasion:'noche',
+   tags:['arabemarc','unisex','noche','oriental','amaderado'],
+   linea:'Oud, especias orientales y ámbar profundo. La carta que nadie espera.',
+   acordes:[['Oriental',90],['Amaderado',82],['Oud',68],['Especiado',55],['Almizclado',42]],
+   notas:{top:['Bergamota','Azafrán','Pimienta Negra'],mid:['Oud','Cuero','Rosa'],base:['Ámbar','Sándalo','Almizcle']},
+   lon:5,proy:5,inspo:{nombre:'Roja Elysium',precio:62,sim:87},hot:false,nuevo:false,precio:62,cash:84,fiado:105,cuando:'Noches · Eventos exclusivos · Formal'},
+
+  {id:'gos-royal',sec:'arabes',marca:'Jo Milano',nombre:'Game of Spades Royal',emoji:'👑',genero:'unisex',ocasion:'noche',
+   tags:['arabemarc','unisex','noche','floral','oriental'],
+   linea:'Rosa búlgara, oud real y sándalo de Mysore. El dupe del Bond No. 9 TriBeCa en versión árabe.',
+   acordes:[['Floral',90],['Oriental',82],['Oud',70],['Especiado',55],['Almizclado',42]],
+   notas:{top:['Rosa Búlgara','Bergamota','Azafrán'],mid:['Oud','Incienso','Iris'],base:['Sándalo','Ámbar','Almizcle']},
+   lon:5,proy:5,inspo:{nombre:'Bond No. 9 TriBeCa',precio:400,sim:87},hot:false,nuevo:false,precio:65,cash:88,fiado:110,cuando:'Noches · Eventos · Ocasiones especiales'},
+
+  {id:'gos-all-in',sec:'arabes',marca:'Jo Milano',nombre:'Game of Spades All In',emoji:'🎰',genero:'unisex',ocasion:'noche',
+   tags:['arabemarc','unisex','noche','gourmand','amaderado'],
+   linea:'Gourmand oscuro y sofisticado. Caramelo negro y vainilla ahumada. Inspirado en City of Stars de Louis Vuitton.',
+   acordes:[['Gourmand',88],['Amaderado',80],['Cuero',65],['Dulce',55],['Oriental',42]],
+   notas:{top:['Caramelo','Bergamota','Cardamomo'],mid:['Cuero','Ámbar','Cacao'],base:['Vainilla','Sándalo','Almizcle']},
+   lon:5,proy:5,inspo:{nombre:'Louis Vuitton City of Stars',precio:380,sim:87},hot:true,nuevo:true,precio:63,cash:86,fiado:108,cuando:'Noches · Eventos · Citas especiales'},
 
   // ════ LATTAFA ════
-  {id:'lattafa-eclaire',sec:'arabes',marca:'Lattafa',nombre:'Éclaire',emoji:'🍮',genero:'femenino',ocasion:'dia',
-   tags:['arabemarc','femenino','dia','dulce','gourmand'],
-   linea:'Caramelo, leche y vainilla. Dulce, cremoso y absolutamente adictivo.',
-   acordes:[['Dulce',95],['Gourmand',88],['Cremoso',75],['Vainilla',65],['Floral',40]],
-   notas:{top:['Caramelo','Leche','Azúcar'],mid:['Miel','Flores Blancas'],base:['Vainilla','Praliné','Almizcle']},
-   lon:3,proy:3,inspo:null,hot:false,nuevo:false,precio:38,cuando:'Diario · Casual · Para regalar'},
+  {id:'lattafa-khamrah',sec:'arabes',marca:'Lattafa',nombre:'Khamrah',emoji:'🍷',genero:'unisex',ocasion:'noche',
+   tags:['arabemarc','unisex','noche','oriental','especiado'],
+   linea:'Canela, nuez moscada, dátiles y ámbar cálido. El ángel árabe que todos buscan.',
+   acordes:[['Oriental',92],['Especiado',85],['Dulce',72],['Amaderado',58],['Ambarado',45]],
+   notas:{top:['Canela','Nuez Moscada','Bergamota'],mid:['Dátiles','Pralinée','Tuberosa'],base:['Vainilla','Haba Tonka','Ámbar','Almizcle']},
+   lon:5,proy:5,inspo:{nombre:'Kilian Angel\'s Share',precio:25,sim:90},hot:true,nuevo:false,precio:25,cash:34,fiado:43,cuando:'Noches · Citas · Invierno'},
 
-  {id:'lattafa-atlas',sec:'arabes',marca:'Lattafa',nombre:'Atlas',emoji:'🏔️',genero:'masculino',ocasion:'noche',
-   tags:['arabemarc','masculino','noche','oriental','amaderado'],
-   linea:'Oud, sándalo y especias cálidas. Majestuoso como la cordillera del Atlas.',
-   acordes:[['Oriental',90],['Amaderado',82],['Oud',70],['Especiado',58],['Almizclado',42]],
-   notas:{top:['Bergamota','Pimienta Negra','Cardamomo'],mid:['Oud','Rosa','Incienso'],base:['Sándalo','Ámbar','Almizcle','Pachulí']},
-   lon:5,proy:4,inspo:null,hot:false,nuevo:false,precio:45,cuando:'Noches · Eventos · Otoño/Invierno'},
+  {id:'lattafa-khamrah-qahwa',sec:'arabes',marca:'Lattafa',nombre:'Khamrah Qahwa',emoji:'🫖',genero:'unisex',ocasion:'noche',
+   tags:['arabemarc','unisex','noche','gourmand','especiado'],
+   linea:'Café arábigo, cardamomo y pralinée. El Khamrah con alma de cafetería de lujo.',
+   acordes:[['Gourmand',90],['Especiado',82],['Oriental',70],['Dulce',60],['Ambarado',45]],
+   notas:{top:['Canela','Cardamomo','Jengibre'],mid:['Pralinée','Frutas Confitadas','Café'],base:['Vainilla','Haba Tonka','Benzoin','Almizcle']},
+   lon:5,proy:5,inspo:{nombre:'Kilian Angel\'s Share con café',precio:25,sim:89},hot:true,nuevo:true,precio:25,cash:34,fiado:43,cuando:'Noches · Invierno · Ocasiones especiales'},
+
+  {id:'her-confession',sec:'arabes',marca:'Lattafa',nombre:'Her Confession',emoji:'🤫',genero:'femenino',ocasion:'dia',
+   tags:['arabemarc','femenino','dia','floral','dulce'],
+   linea:'Frutas rojas, jazmín y rosa con base de almizcle suave. El secreto femenino viral.',
+   acordes:[['Floral',90],['Afrutados',82],['Dulce',68],['Almizclado',52],['Cremoso',38]],
+   notas:{top:['Frutas Rojas','Bergamota','Pera'],mid:['Jazmín','Rosa','Peonía'],base:['Almizcle','Ámbar','Vainilla']},
+   lon:4,proy:4,inspo:{nombre:'YSL Mon Paris',precio:23,sim:88},hot:true,nuevo:false,precio:23,cash:32,fiado:40,cuando:'Diario · Trabajo · Todo el año'},
+
+  {id:'his-confession',sec:'arabes',marca:'Lattafa',nombre:'His Confession',emoji:'🤐',genero:'masculino',ocasion:'noche',
+   tags:['arabemarc','masculino','noche','amaderado','especiado'],
+   linea:'Oud suave, cardamomo y almizcle masculino. El complemento perfecto de Her Confession.',
+   acordes:[['Amaderado',88],['Especiado',78],['Oriental',65],['Almizclado',52],['Cuero',38]],
+   notas:{top:['Bergamota','Cardamomo','Pimienta Negra'],mid:['Oud','Cuero','Rosa'],base:['Sándalo','Almizcle','Ámbar']},
+   lon:4,proy:4,inspo:{nombre:'Dior Fahrenheit',precio:23,sim:85},hot:false,nuevo:false,precio:23,cash:32,fiado:40,cuando:'Noches · Citas · Invierno'},
 
   {id:'ishq-al-shuyukh-silver',sec:'arabes',marca:'Lattafa',nombre:'Ishq Al Shuyukh Silver',emoji:'🥈',genero:'unisex',ocasion:'dia',
    tags:['arabemarc','unisex','dia','frutal','dulce'],
    linea:'Piña tropical, limón y vainilla. El 1 Million Lucky árabe con más carácter.',
    acordes:[['Afrutados',90],['Dulce',82],['Cítrico',68],['Ambarado',55],['Amaderado',38]],
-   notas:{top:['Limón','Bergamota'],mid:['Piña','Pimienta Negra'],base:['Vainilla','Amberwood','Cedro','Pachulí']},
-   lon:4,proy:4,inspo:{nombre:'Paco Rabanne 1 Million Lucky',precio:130,sim:85},hot:false,nuevo:false,precio:38,cuando:'Día · Casual · Primavera/Verano'},
+   notas:{top:['Limón','Bergamota'],mid:['Piña','Pimienta Negra'],base:['Vainilla','Amberwood','Cedro']},
+   lon:4,proy:4,inspo:{nombre:'Paco Rabanne 1 Million Lucky',precio:23,sim:85},hot:false,nuevo:false,precio:23,cash:32,fiado:40,cuando:'Día · Casual · Primavera/Verano'},
 
-  {id:'dubai-nights-midnight',sec:'arabes',marca:'Lattafa',nombre:'Dubai Nights Midnight',emoji:'🌌',genero:'unisex',ocasion:'noche',
-   tags:['arabemarc','unisex','noche','oriental','floral'],
-   linea:'Azafrán, rosa y oud. Lujo árabe en su máxima expresión nocturna.',
-   acordes:[['Oriental',92],['Floral',80],['Oud',68],['Especiado',55],['Almizclado',42]],
-   notas:{top:['Azafrán','Pimienta Negra','Bergamota'],mid:['Rosa','Oud','Notas Amaderadas'],base:['Ámbar','Almizcle','Sándalo']},
-   lon:5,proy:4,inspo:null,hot:false,nuevo:false,precio:45,cuando:'Noches · Eventos formales · Invierno'},
+  {id:'lattafa-eclaire',sec:'arabes',marca:'Lattafa',nombre:'Éclaire',emoji:'🍮',genero:'femenino',ocasion:'dia',
+   tags:['arabemarc','femenino','dia','dulce','gourmand'],
+   linea:'Caramelo, leche y vainilla. Dulce, cremoso y absolutamente adictivo.',
+   acordes:[['Dulce',95],['Gourmand',88],['Cremoso',75],['Vainilla',65],['Floral',40]],
+   notas:{top:['Caramelo','Leche','Azúcar'],mid:['Miel','Flores Blancas'],base:['Vainilla','Praliné','Almizcle']},
+   lon:3,proy:3,inspo:{nombre:'Louis Vuitton City of Stars',precio:380,sim:87},hot:false,nuevo:false,precio:22,cash:30,fiado:38,cuando:'Diario · Casual · Para regalar'},
 
-  {id:'lattafa-afeef',sec:'arabes',marca:'Lattafa',nombre:'Afeef',emoji:'🌹',genero:'unisex',ocasion:'noche',
-   tags:['arabemarc','unisex','noche','oriental','floral'],
-   linea:'Rosa, azafrán y almizcle. Oriental, envolvente y de larga duración.',
-   acordes:[['Oriental',88],['Floral',78],['Especiado',65],['Amaderado',52],['Almizclado',40]],
-   notas:{top:['Bergamota','Azafrán','Rosa'],mid:['Oud','Incienso'],base:['Almizcle','Ámbar','Vainilla']},
-   lon:5,proy:4,inspo:null,hot:false,nuevo:false,precio:42,cuando:'Noches · Citas · Otoño/Invierno'},
+  {id:'lattafa-eclaire-pistache',sec:'arabes',marca:'Lattafa',nombre:'Éclaire Pistache',emoji:'🟢',genero:'femenino',ocasion:'dia',
+   tags:['arabemarc','femenino','dia','gourmand','dulce'],
+   linea:'Pistacho, flor de almendro y vainilla cremosa. Exclusivo y diferenciador.',
+   acordes:[['Gourmand',88],['Dulce',80],['Floral',62],['Cremoso',55],['Almizclado',38]],
+   notas:{top:['Pistacho','Bergamota','Almendra'],mid:['Flor de Almendro','Vainilla','Pralinée'],base:['Almizcle','Cedro','Ámbar']},
+   lon:3,proy:3,inspo:{nombre:'Commodity Velvet',precio:22,sim:86},hot:false,nuevo:true,precio:22,cash:30,fiado:38,cuando:'Casual · Primavera · Para regalar'},
 
-  {id:'teriaq-lattafa',sec:'arabes',marca:'Lattafa',nombre:'Teriaq',emoji:'⚗️',genero:'masculino',ocasion:'noche',
-   tags:['arabemarc','masculino','noche','amaderado','especiado'],
-   linea:'Especiado, amaderado y con personalidad. Para el hombre que no sigue tendencias.',
-   acordes:[['Amaderado',90],['Especiado',82],['Oriental',68],['Cuero',52],['Almizclado',38]],
-   notas:{top:['Pimienta Negra','Bergamota','Cardamomo'],mid:['Cuero','Salvia'],base:['Ámbar','Pachulí','Almizcle','Sándalo']},
-   lon:4,proy:4,inspo:null,hot:false,nuevo:false,precio:40,cuando:'Noches · Otoño/Invierno · Formal'},
+  {id:'asad-bourbon',sec:'arabes',marca:'Lattafa',nombre:'Asad Bourbon',emoji:'🥃',genero:'masculino',ocasion:'noche',
+   tags:['arabemarc','masculino','noche','oriental','dulce'],
+   linea:'Lavanda, cacao y vainilla bourbon. El gemelo accesible del Azzaro Most Wanted.',
+   acordes:[['Oriental',90],['Dulce',82],['Especiado',68],['Amaderado',55],['Aromático',40]],
+   notas:{top:['Lavanda','Ciruela','Pimienta Rosa'],mid:['Cacao','Nuez Moscada','Davana'],base:['Vainilla Bourbon','Ámbar','Vetiver']},
+   lon:4,proy:4,inspo:{nombre:'Azzaro The Most Wanted Intense',precio:20,sim:87},hot:true,nuevo:true,precio:20,cash:27,fiado:34,cuando:'Noches · Invierno · Citas'},
 
-  {id:'yara-tous',sec:'arabes',marca:'Lattafa',nombre:'Yara Tous',emoji:'🌼',genero:'femenino',ocasion:'dia',
+  {id:'qaed-al-fursan-negra',sec:'arabes',marca:'Lattafa',nombre:'Qaed Al Fursan (negra)',emoji:'🖤',genero:'masculino',ocasion:'noche',
+   tags:['arabemarc','masculino','noche','frutal','amaderado'],
+   linea:'Piña, abedul ahumado y ambergris. El Aventus árabe más buscado y accesible.',
+   acordes:[['Afrutados',90],['Amaderado',82],['Almizclado',68],['Cítrico',52],['Ambarado',38]],
+   notas:{top:['Piña','Bergamota','Limón'],mid:['Abedul','Musgo de Roble','Jazmín'],base:['Ambergris','Almizcle','Pachulí']},
+   lon:5,proy:5,inspo:{nombre:'Creed Aventus',precio:15,sim:85},hot:true,nuevo:false,precio:15,cash:21,fiado:27,cuando:'Noches · Formal · Todo el año'},
+
+  {id:'qaed-al-fursan-marron',sec:'arabes',marca:'Lattafa',nombre:'Qaed Al Fursan (marrón)',emoji:'🤎',genero:'masculino',ocasion:'noche',
+   tags:['arabemarc','masculino','noche','oriental','amaderado'],
+   linea:'Oud cálido, especias orientales y ambergris. 85% idéntico al Eros Najim de Versace.',
+   acordes:[['Oriental',88],['Amaderado',80],['Oud',65],['Especiado',52],['Almizclado',38]],
+   notas:{top:['Bergamota','Pimienta','Cardamomo'],mid:['Oud','Rosa','Incienso'],base:['Ámbar','Sándalo','Almizcle']},
+   lon:4,proy:4,inspo:{nombre:'Versace Eros Najim',precio:160,sim:85},hot:false,nuevo:false,precio:18,cash:25,fiado:32,cuando:'Noches · Eventos · Invierno'},
+
+  {id:'yara-elixir',sec:'arabes',marca:'Lattafa',nombre:'Yara Elixir',emoji:'✨',genero:'femenino',ocasion:'noche',
+   tags:['arabemarc','femenino','noche','floral','oriental'],
+   linea:'Rosa turca, oud suave y vainilla cálida. La versión más intensa y seductora de Yara.',
+   acordes:[['Floral',90],['Oriental',82],['Oud',65],['Dulce',55],['Almizclado',42]],
+   notas:{top:['Rosa','Bergamota','Frutas Rojas'],mid:['Oud','Incienso','Iris'],base:['Vainilla','Almizcle','Ámbar']},
+   lon:5,proy:5,inspo:{nombre:'YSL Libre Intense',precio:24,sim:89},hot:true,nuevo:false,precio:24,cash:33,fiado:42,cuando:'Noches · Citas · Otoño/Invierno'},
+
+  {id:'yara',sec:'arabes',marca:'Lattafa',nombre:'Yara',emoji:'🌸',genero:'femenino',ocasion:'dia',
    tags:['arabemarc','femenino','dia','floral','dulce'],
-   linea:'Floral, dulce y femenina. La versión más versátil de la familia Yara.',
-   acordes:[['Floral',90],['Dulce',82],['Afrutados',68],['Almizclado',52],['Cremoso',38]],
-   notas:{top:['Bergamota','Pera','Frutas Cítricas'],mid:['Jazmín','Rosa','Violeta'],base:['Almizcle Blanco','Vainilla','Sándalo']},
-   lon:4,proy:3,inspo:null,hot:false,nuevo:false,precio:40,cuando:'Diario · Oficina · Todo el año'},
+   linea:'Lichi, rosa y peonía con base de almizcle sedoso. El dupe árabe del Miss Dior Blooming Bouquet.',
+   acordes:[['Floral',92],['Afrutados',80],['Dulce',68],['Almizclado',52],['Amaderado',35]],
+   notas:{top:['Lichi','Bergamota','Pera'],mid:['Rosa','Jazmín','Violeta'],base:['Sándalo','Almizcle','Vainilla']},
+   lon:4,proy:4,inspo:{nombre:'Dior Miss Dior Blooming Bouquet',precio:140,sim:88},hot:true,nuevo:false,precio:18,cash:25,fiado:32,cuando:'Diario · Trabajo · Todo el año'},
 
-  // ════ EMPER ════
-  {id:'back-street-ny',sec:'arabes',marca:'Emper',nombre:'Back Street of New York',emoji:'🗽',genero:'masculino',ocasion:'dia',
-   tags:['arabemarc','masculino','dia','fresco','amaderado'],
-   linea:'Fresco, amaderado y urbano. Las calles de Nueva York en un frasco.',
-   acordes:[['Fresco',88],['Amaderado',78],['Cítrico',65],['Aromático',52],['Almizclado',38]],
-   notas:{top:['Bergamota','Limón','Menta'],mid:['Lavanda','Geranio'],base:['Sándalo','Cedro','Almizcle','Ámbar']},
-   lon:3,proy:3,inspo:null,hot:false,nuevo:false,precio:35,cuando:'Día · Trabajo · Casual'},
+  // ════ RASASI HAWAS ════
+  {id:'hawas-black',sec:'arabes',marca:'Rasasi',nombre:'Hawas Black',emoji:'⬛',genero:'masculino',ocasion:'noche',
+   tags:['arabemarc','masculino','noche','amaderado','frutal'],
+   linea:'Piña ahumada, cedro y musgo de roble. El dupe más cercano al Hacivat de Nishane que existe.',
+   acordes:[['Amaderado',90],['Afrutados',80],['Almizclado',68],['Verde',52],['Cítrico',38]],
+   notas:{top:['Bergamota','Pomelo','Piña'],mid:['Pachulí','Cedro','Musgo de Roble'],base:['Ámbar','Sándalo','Almizcle']},
+   lon:4,proy:4,inspo:{nombre:'Nishane Hacivat',precio:280,sim:87},hot:false,nuevo:false,precio:25,cash:34,fiado:43,cuando:'Noches · Trabajo formal · Invierno'},
 
-  // ════ MARCAS ORIGINALES ════
-  {id:'jpg-le-male',sec:'lujo',marca:'Jean Paul Gaultier',nombre:'Le Male Elixir',emoji:'🫡',genero:'masculino',ocasion:'noche',
-   tags:['lujo','masculino','noche','oriental','dulce'],
-   linea:'El rey absoluto de las noches. Menta, lavanda y vainilla en su versión más seductora.',
-   acordes:[['Oriental',95],['Dulce',88],['Amaderado',75],['Aromático',65],['Especiado',50]],
-   notas:{top:['Menta','Cardamomo'],mid:['Lavanda','Benjuí','Especias'],base:['Vainilla','Haba Tonka','Ámbar']},
-   lon:5,proy:5,inspo:null,hot:true,nuevo:false,precio:110,cuando:'Noches · Citas · Eventos exclusivos'},
+  {id:'hawas-diva',sec:'arabes',marca:'Rasasi',nombre:'Hawas Diva',emoji:'💅',genero:'femenino',ocasion:'noche',
+   tags:['arabemarc','femenino','noche','floral','dulce'],
+   linea:'Lichi, rosa y praliné. 90% idéntico al Valentino Donna Born in Roma Intense. Beast mode femenino.',
+   acordes:[['Floral',92],['Dulce',85],['Afrutados',70],['Amaderado',52],['Almizclado',40]],
+   notas:{top:['Frutas Rojas','Ruibarbo','Lichi'],mid:['Rosa','Cedro','Incienso'],base:['Vainilla','Almizcle','Ambergris']},
+   lon:5,proy:5,inspo:{nombre:'Valentino Donna Born in Roma Intense',precio:180,sim:90},hot:true,nuevo:true,precio:33,cash:45,fiado:57,cuando:'Noches · Citas · Eventos'},
 
-  {id:'azzaro-most-wanted',sec:'lujo',marca:'Azzaro',nombre:'The Most Wanted Intense',emoji:'🖤',genero:'masculino',ocasion:'noche',
-   tags:['lujo','masculino','noche','amaderado','oriental'],
-   linea:'Cardamomo vibrante, toffee adictivo y maderas ámbar. Para el hombre que elige su destino.',
-   acordes:[['Amaderado',90],['Especiado',80],['Aromático',65],['Dulce',55],['Cuero',40]],
-   notas:{top:['Bergamota','Cardamomo'],mid:['Lavanda','Cuero'],base:['Licor','Musgo','Ámbar','Maderas']},
-   lon:4,proy:4,inspo:null,hot:false,nuevo:false,precio:88,cuando:'Noches · Citas · Otoño'},
+  {id:'hawas-fire',sec:'arabes',marca:'Rasasi',nombre:'Hawas Fire',emoji:'🔥',genero:'masculino',ocasion:'noche',
+   tags:['arabemarc','masculino','noche','especiado','amaderado'],
+   linea:'Salvia, ámbar ahumado y ambergris. Magnético, potente y único. Beast mode total.',
+   acordes:[['Especiado',88],['Ambarado',80],['Aromático',65],['Almizclado',52],['Acuático',40]],
+   notas:{top:['Salvia Romana','Bergamota'],mid:['Notas Marinas','Jazmín Egipcio'],base:['Ámbar','Ambergris','Notas Minerales']},
+   lon:5,proy:5,inspo:{nombre:'Spicebomb Infrarouge',precio:35,sim:89},hot:true,nuevo:false,precio:35,cash:48,fiado:60,cuando:'Noches · Citas · Eventos'},
 
-  {id:'dg-intenso',sec:'lujo',marca:'Dolce & Gabbana',nombre:'Pour Homme Intenso',emoji:'🌿',genero:'masculino',ocasion:'noche',
-   tags:['lujo','masculino','noche','amaderado'],
-   linea:'Amaderado, tabaco suave y especias cálidas. Elegancia italiana en estado puro.',
-   acordes:[['Amaderado',92],['Especiado',78],['Oriental',65],['Cuero',50],['Aromático',38]],
-   notas:{top:['Bergamota','Cilantro','Toronja'],mid:['Salvia','Cardamomo','Haba Tonka'],base:['Tabaco','Cedro','Ámbar','Vetiver']},
-   lon:4,proy:4,inspo:null,hot:false,nuevo:false,precio:80,cuando:'Cenas formales · Otoño · Invierno'},
+  {id:'hawas-kobra',sec:'arabes',marca:'Rasasi',nombre:'Hawas Kobra',emoji:'🐍',genero:'masculino',ocasion:'dia',
+   tags:['arabemarc','masculino','dia','fresco','aromatico'],
+   linea:'Jengibre fresco, té verde y cedro. Limpio, moderno y de largo recorrido. Ideal oficina.',
+   acordes:[['Aromático',90],['Fresco',82],['Cítrico',68],['Amaderado',52],['Almizclado',38]],
+   notas:{top:['Jengibre','Bergamota','Mandarina'],mid:['Canela','Té Verde','Neroli'],base:['Almizcle','Maderas','Ámbar']},
+   lon:4,proy:4,inspo:{nombre:'Invictus Victory Elixir',precio:35,sim:88},hot:false,nuevo:true,precio:35,cash:48,fiado:60,cuando:'Día · Trabajo · Casual'},
 
-  {id:'eros-versace',sec:'lujo',marca:'Versace',nombre:'Eros EDT 100ml',emoji:'⚡',genero:'masculino',ocasion:'dia',
-   tags:['lujo','masculino','dia','noche','fresco','dulce'],
-   linea:'La fragancia más icónica de Versace. Menta, manzana verde y vainilla sensual.',
-   acordes:[['Amaderado',88],['Fresco',78],['Dulce',68],['Oriental',55],['Aromático',42]],
-   notas:{top:['Menta','Manzana Verde','Limón'],mid:['Haba Tonka','Geranio','Rosa'],base:['Vainilla','Vetiver','Cedro','Almizcle']},
-   lon:4,proy:4,inspo:null,hot:true,nuevo:false,precio:65,cuando:'Día y noche · Todo el año · Muy versátil'},
+  {id:'hawas-tropical',sec:'arabes',marca:'Rasasi',nombre:'Hawas Tropical',emoji:'🥥',genero:'masculino',ocasion:'dia',
+   tags:['arabemarc','masculino','dia','frutal','fresco'],
+   linea:'Coco cremoso, higo fresco y menta. Vacaciones en un frasco. El Le Beau árabe.',
+   acordes:[['Tropical',92],['Fresco',85],['Cremoso',70],['Verde',55],['Almizclado',38]],
+   notas:{top:['Agua de Coco','Hoja de Higo','Jengibre'],mid:['Coco','Higo','Menta'],base:['Sándalo','Haba Tonka','Almizcle']},
+   lon:5,proy:5,inspo:{nombre:'JPG Le Beau Paradise Garden',precio:30,sim:85},hot:true,nuevo:true,precio:30,cash:41,fiado:52,cuando:'Verano · Playa · Casual'},
+
+  {id:'hawas-viper',sec:'arabes',marca:'Rasasi',nombre:'Hawas Viper',emoji:'🐉',genero:'masculino',ocasion:'noche',
+   tags:['arabemarc','masculino','noche','amaderado','especiado'],
+   linea:'Acuático fresco, cítricos marinos y base ambarada. El dupe árabe del Invictus Aqua de Paco Rabanne.',
+   acordes:[['Amaderado',88],['Especiado',80],['Aromático',68],['Oriental',52],['Almizclado',38]],
+   notas:{top:['Bergamota','Lavanda','Pimienta Negra'],mid:['Pachulí','Cedro','Especias'],base:['Ámbar','Sándalo','Almizcle']},
+   lon:5,proy:5,inspo:{nombre:'Paco Rabanne Invictus Aqua',precio:110,sim:87},hot:true,nuevo:true,precio:35,cash:48,fiado:60,cuando:'Noches · Citas · Invierno'},
+
+  // ════ ORIGINALES DE LUJO ════
+  {id:'lady-emblem-montblanc',sec:'lujo',marca:'Montblanc',nombre:'Lady Emblem',emoji:'💎',genero:'femenino',ocasion:'dia',
+   tags:['lujo','femenino','dia','floral','almizclado'],
+   linea:'Rosa, jazmín, frambuesa y almizcle blanco sedoso. La elegancia Montblanc para ella.',
+   acordes:[['Floral',88],['Almizclado',80],['Afrutados',65],['Cremoso',52],['Amaderado',38]],
+   notas:{top:['Frambuesa','Bergamota','Mandarina'],mid:['Rosa','Jazmín','Peonía'],base:['Almizcle','Sándalo','Ámbar']},
+   lon:4,proy:4,inspo:{nombre:'Paco Rabanne Invictus Aqua',precio:110,sim:87},hot:false,nuevo:true,precio:37,cash:50,fiado:63,cuando:'Diario · Trabajo · Todo el año'},
+
+  {id:'armaf-myself-edp',sec:'lujo',marca:'Armaf',nombre:'Myself EDP',emoji:'🪞',genero:'masculino',ocasion:'dia',
+   tags:['lujo','masculino','dia','amaderado','aromatico'],
+   linea:'Salvia, madera de cachemira y almizcle suave. El original Armaf de lujo para el día.',
+   acordes:[['Amaderado',88],['Aromático',78],['Fresco',62],['Almizclado',52],['Especiado',38]],
+   notas:{top:['Salvia','Lavanda','Bergamota'],mid:['Cachemira','Sándalo','Pachulí'],base:['Almizcle','Cedro','Ámbar']},
+   lon:5,proy:4,inspo:{nombre:'Jean Paul Gaultier Le Beau',precio:120,sim:87},hot:false,nuevo:true,precio:90,cash:122,fiado:153,cuando:'Trabajo · Día · Reuniones formales'},
+
+  {id:'invictus-victory-elixir',sec:'lujo',marca:'Paco Rabanne',nombre:'Invictus Victory Elixir',emoji:'🏆',genero:'masculino',ocasion:'noche',
+   tags:['lujo','masculino','noche','frutal','amaderado'],
+   linea:'Pomelo, guayaco y laurel. El campeón de las fragancias masculinas. Proyección legendaria.',
+   acordes:[['Afrutados',90],['Amaderado',82],['Aromático',68],['Ambarado',55],['Almizclado',42]],
+   notas:{top:['Pomelo','Laurel','Pimienta Negra'],mid:['Madera de Guayaco','Jazmín'],base:['Ámbar','Pachulí','Almizcle']},
+   lon:5,proy:5,inspo:{nombre:'Louis Vuitton Imagination',precio:320,sim:86},hot:true,nuevo:true,precio:78,cash:106,fiado:133,cuando:'Noches · Eventos · Citas'},
+
+  {id:'the-one-dg-edp',sec:'lujo',marca:'Dolce & Gabbana',nombre:'The One for Men EDP',emoji:'1️⃣',genero:'masculino',ocasion:'noche',
+   tags:['lujo','masculino','noche','oriental','especiado'],
+   linea:'Cardamomo, jengibre, tabaco y ámbar. Sofisticación italiana en cada spray.',
+   acordes:[['Oriental',90],['Especiado',82],['Amaderado',68],['Aromático',55],['Cuero',40]],
+   notas:{top:['Cardamomo','Jengibre','Albahaca'],mid:['Tabaco','Naranja Amarga','Cedro'],base:['Ámbar','Vetiver','Musgo']},
+   lon:5,proy:4,inspo:{nombre:'Valentino Born in Roma',precio:140,sim:85},hot:false,nuevo:true,precio:52,cash:71,fiado:89,cuando:'Noches · Citas · Otoño/Invierno'},
+
 ];
 
 // ═══════════════════════════════════════════════════════
@@ -831,8 +869,8 @@ function loadPrices(){
     }
   }catch(e){}
   PERFUMES.forEach(p=>{
-    if(!p.cash)  p.cash  = p.precio;
-    if(!p.fiado) p.fiado = Math.ceil((p.precio*1.15)/5)*5;
+    if(!p.cash)  p.cash  = Math.ceil(p.precio*1.35);
+    if(!p.fiado) p.fiado = Math.ceil(p.cash*1.25);
   });
 }
 
@@ -844,11 +882,21 @@ function loadImgs(){
 }
 
 function getImgSrc(id){ return storedImgs[id] || null; }
+function getLocalSrc(id){
+  const exts=['jpg','webp','avif','png'];
+  for(const ext of exts){
+    const src=IMG_FOLDER+id+'.'+ext;
+    const img=new Image();
+    img.src=src;
+    if(img.complete&&img.naturalWidth>0) return src;
+  }
+  return IMG_FOLDER+id+'.jpg';
+}
 
 function getCardImgHtml(p){
   const src = getImgSrc(p.id);
   if(src) return `<img src="${src}" alt="${p.nombre}" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">`;
-  return `<img src="${IMG_FOLDER}${p.id}.jpg" alt="${p.nombre}" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">`;
+  return `<img src="${getImgSrc(p.id)||IMG_FOLDER+p.id+'.jpg'}" alt="${p.nombre}" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">`;
 }
 
 function loadMsgConfig(){
@@ -871,7 +919,6 @@ function buildCard(p){
     <div class="inspo-card">
       <div class="inspo-icon">💡</div>
       <div class="inspo-body"><div class="inspo-label">Inspirado en</div><div class="inspo-name">${p.inspo.nombre}</div></div>
-      <div class="inspo-save"><div class="inspo-save-label">Ahorras</div><div class="inspo-save-val">${fmt(p.inspo.precio-p.precio)}</div></div>
     </div>
     <div>
       <div class="sim-label"><span>Similitud olfativa</span><span class="sim-pct">${p.inspo.sim}%</span></div>
@@ -885,7 +932,7 @@ function buildCard(p){
   return `<div class="pcard" data-id="${p.id}" data-tags="${p.tags.join(',')}" data-q="${(p.nombre+' '+p.marca+' '+p.acordes.map(a=>a[0]).join(' ')+' '+(p.notas.top.concat(p.notas.mid,p.notas.base)).join(' ')).toLowerCase()}" onclick="openModal('${p.id}')">
     <div class="card-photo">
       ${getCardImgHtml(p)}
-      <div class="ph"><div class="ph-emoji">${p.emoji}</div><div class="ph-hint">img/${p.id}.jpg</div></div>
+      <div class="ph"><div class="ph-emoji">${p.emoji}</div><div class="ph-hint">img/${p.id}</div></div>
       <div class="photo-overlays">
         <div class="badge-row">
           <span class="badge ${gClass}">${gLabel}</span>
@@ -987,7 +1034,7 @@ function openModal(id){
   const imgSrc = getImgSrc(p.id);
 
   document.getElementById('modal-photo').innerHTML = `
-    <img src="${imgSrc||IMG_FOLDER+p.id+'.jpg'}" alt="${p.nombre}" style="width:100%;height:100%;object-fit:cover" onerror="this.style.display='none';document.getElementById('mpfb').style.display='flex'">
+    <img src="${imgSrc||IMG_FOLDER+p.id+'.jpg'}" alt="${p.nombre}" style="width:100%;height:100%;object-fit:contain;object-position:center top;background:var(--dark3)" onerror="this.style.display='none';document.getElementById('mpfb').style.display='flex'">
     <div id="mpfb" style="display:none;width:100%;height:100%;align-items:center;justify-content:center;background:linear-gradient(160deg,#181408,#0c0c0c);font-size:72px">${p.emoji}</div>
     <div class="photo-overlays"><div class="badge-row"><span class="badge b-occ">${p.ocasion==='noche'?'🌙 Noche':'☀️ Día'}</span>${p.hot?'<span class="badge b-hot">🔥 Top</span>':''}</div></div>
     <div class="modal-photo-name"><div class="photo-brand">${p.marca}</div><div class="photo-title">${p.nombre}</div></div>`;
@@ -998,7 +1045,6 @@ function openModal(id){
       <div class="inspo-card" style="margin-bottom:8px;">
         <div class="inspo-icon">💡</div>
         <div class="inspo-body"><div class="inspo-label">Inspirado en</div><div class="inspo-name">${p.inspo.nombre} (${fmt(p.inspo.precio)})</div></div>
-        <div class="inspo-save"><div class="inspo-save-label">Ahorras</div><div class="inspo-save-val">${fmt(p.inspo.precio-p.precio)}</div></div>
       </div>
       <div class="sim-label"><span>Similitud olfativa</span><span class="sim-pct">${p.inspo.sim}%</span></div>
       <div class="sim-bar-bg"><div class="sim-bar-fill" style="width:${p.inspo.sim}%"></div></div>
@@ -1246,7 +1292,7 @@ function saveImgToStorage(){
 }
 function buildImgGuide(){
   const list=document.getElementById('img-guide-list');
-  if(list) list.innerHTML=PERFUMES.map(p=>`<div class="img-name ${storedImgs[p.id]?'has-img':''}"><span>${storedImgs[p.id]?'✓':'○'}</span>img/${p.id}.jpg</div>`).join('');
+  if(list) list.innerHTML=PERFUMES.map(p=>`<div class="img-name ${storedImgs[p.id]?'has-img':''}"><span>${storedImgs[p.id]?'✓':'○'}</span>img/${p.id}</div>`).join('');
 }
 
 // ── MENSAJES WA ADMIN ────────────────────────────────
